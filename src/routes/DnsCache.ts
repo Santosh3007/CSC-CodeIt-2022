@@ -1,6 +1,12 @@
 import express from 'express';
 import IndexController from '../controllers/IndexController';
 
+const swap = (arr: string[], i: number, j: number) => {
+  const temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+};
+
 export default () => {
   const indexRouter = express.Router();
   const indexController = new IndexController();
@@ -35,13 +41,14 @@ export default () => {
       const cacheSize = req.body.cacheSize;
       const log: string[] = req.body.log;
       let cache: string[] = [];
+      let cacheAddress: string[] = [];
       for (let i = 0; i < log.length; i++) {
         let name = log[i];
         console.log(dnsLookup.includes(name));
         if (cache.includes(name)) {
           jsonRes.push({
             status: 'cache hit',
-            ipAddress: dnsLookup[cache.indexOf(name) * 2 + 1],
+            ipAddress: cacheAddress[cache.indexOf(name)],
           });
         } else if (dnsLookup.includes(name)) {
           jsonRes.push({
@@ -49,8 +56,10 @@ export default () => {
             ipAddress: dnsLookup[dnsLookup.indexOf(name) + 1],
           });
           cache.push(name);
+          cacheAddress.push(dnsLookup[dnsLookup.indexOf(name) + 1]);
           if (cache.length > cacheSize) {
             cache.shift();
+            cacheAddress.shift();
           }
         } else {
           jsonRes.push({
