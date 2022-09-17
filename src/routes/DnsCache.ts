@@ -59,8 +59,8 @@ export default () => {
           });
         }
       }
-
-      res.status(200).json({JSON: jsonRes});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(jsonRes);
     });
   });
 
