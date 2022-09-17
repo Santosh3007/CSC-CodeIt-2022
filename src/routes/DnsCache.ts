@@ -46,10 +46,16 @@ export default () => {
         let name = log[i];
         console.log(dnsLookup.includes(name));
         if (cache.includes(name)) {
+          let address = cacheAddress[cache.indexOf(name)];
+          let ind = cache.indexOf(name);
           jsonRes.push({
             status: 'cache hit',
-            ipAddress: cacheAddress[cache.indexOf(name)],
+            ipAddress: address,
           });
+          cache.splice(ind, 1);
+          cacheAddress.splice(ind, 1);
+          cache.push(name);
+          cacheAddress.push(address);
         } else if (dnsLookup.includes(name)) {
           jsonRes.push({
             status: 'cache miss',
