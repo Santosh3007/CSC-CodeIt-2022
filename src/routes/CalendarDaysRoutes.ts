@@ -52,11 +52,11 @@ export default () => {
     for (let i = 0; i < 12; i++) {
       for (let j = 1; j < 8; j++) {
         let currDay = new Date(year2, i, j);
-        console.log(currDay);
-        console.log(firstDay);
-        console.log(
-          (currDay.getTime() - firstDay.getTime()) / (1000 * 3600 * 24)
-        );
+        // console.log(currDay);
+        // console.log(firstDay);
+        // console.log(
+        // (currDay.getTime() - firstDay.getTime()) / (1000 * 3600 * 24)
+        // );
         if (result[i].has(currDay.getDay())) {
           const diff =
             Math.ceil(

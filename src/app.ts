@@ -3,6 +3,7 @@ import CalendarDaysRoutes from './routes/CalendarDaysRoutes';
 import bodyParser from 'body-parser';
 
 import IndexRoutes from './routes/IndexRoutes';
+import DnsCache from './routes/DnsCache';
 
 export default class App {
   public app: Application;
@@ -31,6 +32,7 @@ export default class App {
   public initControllers() {
     this.app.use('/', IndexRoutes());
     this.app.use('/', CalendarDaysRoutes());
+    this.app.use('/', DnsCache());
   }
 
   public listen(port: string) {
