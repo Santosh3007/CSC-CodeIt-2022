@@ -1,5 +1,6 @@
 import express, {Application} from 'express';
 import CalendarDaysRoutes from './routes/CalendarDaysRoutes';
+import bodyParser from 'body-parser';
 
 import IndexRoutes from './routes/IndexRoutes';
 
@@ -11,8 +12,8 @@ export default class App {
   }
 
   public initMiddlewares() {
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({extended: true}));
+    this.app.use(bodyParser.json({limit: '5gb'}));
+    this.app.use(bodyParser.urlencoded({extended: true, limit: '5gb'}));
     this.app.use((req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header(
