@@ -5,8 +5,7 @@ export default () => {
   const indexRouter = express.Router();
   const indexController = new IndexController();
   const fs = require('fs');
-  const dnsCachePath = __dirname + '/../persist/dnsCache.txt';
-  const lookupTablePath = __dirname + '/../persist/lookupTable.txt';
+  const lookupTablePath = 'src/persist/lookupTable.txt';
 
   indexRouter.post('/instantiateDNSLookup', (req, res) => {
     let lookupTable = req.body.lookupTable;
